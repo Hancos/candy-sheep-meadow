@@ -1,0 +1,15 @@
+{
+  "name": "zombie-attack",
+  "description": "Zombie Attack",
+  "version": "1.0.0",
+  "dependencies": {
+    "@dcl-sdk/utils": "^1.4.0",
+    "@dcl/js-runtime": "7.22.4",
+    "@dcl/sdk": "7.22.4"
+  },
+  "scripts": {
+    "build": "sdk-commands build --skip-install",
+    "deploy": "sdk-commands deploy",
+    "start": "sdk-commands start"
+  }
+}
