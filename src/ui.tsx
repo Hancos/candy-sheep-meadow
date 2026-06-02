@@ -4,7 +4,7 @@ import { TextAlignMode, TextureFilterMode, TextureWrapMode } from "@dcl/sdk/ecs"
 import { Color4 } from "@dcl/sdk/math"
 
 
-const projectPath = "zombie-attack"
+const projectPath = "candy-sheep-meadow"
 const description = "Candy Sheep Meadow"
 
 

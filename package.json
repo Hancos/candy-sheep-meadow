@@ -1,6 +1,6 @@
 {
-  "name": "zombie-attack",
-  "description": "Zombie Attack",
+  "name": "candy-sheep-meadow",
+  "description": "Candy Sheep Meadow",
   "version": "1.0.0",
   "dependencies": {
     "@dcl-sdk/utils": "^1.4.0",

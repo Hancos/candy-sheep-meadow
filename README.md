@@ -1,22 +1,42 @@
-# Zombie Attack
+# Candy Sheep Meadow
 
-A scene that uses `Quaternion` and `Vector3` methods to move an animated character following and looking at the player
+Candy Sheep Meadow is a cozy sheep farm experience built in Decentraland.
 
-![](screenshots/zombie-attack.gif)
+Players can enter a peaceful meadow, interact with colorful sheep, pet them, and enjoy simple visual and audio reactions. The project focuses on relaxation, cute interactions, and a welcoming atmosphere rather than competition or complex gameplay.
 
-This scene shows:
+![](screenshots/candy-sheep-meadow.gif)
 
-- How to add a 3D model
-- How to play animations from a 3D model
-- How to get the Player's entity `Transform` and its position
-- How to rotate and move an entity smoothly
-- How to create custom components
-- How to use group of entities that have a specific component
-- How to position entities randomly with `Math.random()`
+## Current Features
 
-## Instructions
+* Sheep react to player proximity
+* Petting interaction
+* Sheep sound effects
+* Sparkle visual effects
+* Simple farm environment
+* Mobile-friendly design
 
-Move around using <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> keys and get chased by a zombie that will play an 'Attack' animation when it reaches the player.
+## Planned Features
+
+* Feeding interactions
+* Bonus "Sheep Rush" event
+* Additional sheep varieties
+* Improved animations
+* Expanded environment details
+* Additional sound design and music
+
+## Technology
+
+* Decentraland SDK 7
+* TypeScript
+* React ECS
+
+## Development Status
+
+This project is being developed as part of the Regenesis Labs Grants Program for Decentraland.
+
+The repository is published under the Apache 2.0 License.
+
+
 
 ## Try it out
 
