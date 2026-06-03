@@ -141,8 +141,3 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
-
-# Third-party assets
-assets/scene/models/turnhead/turnhead.glb
-assets/scene/models/turnhead2/turnhead2.glb
-assets/scene/models/turnhead4/turnhead4.glb
