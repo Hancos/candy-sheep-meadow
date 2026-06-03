@@ -85,12 +85,12 @@ export function setupRushButton() {
   rushButton = engine.addEntity()
 
   Transform.create(rushButton, {
-    position: Vector3.create(16, 0.2, 16),
-    scale: Vector3.create(1, 0.3, 1)
+    position: Vector3.create(18, 1, 24),
+    scale: Vector3.create(1, 1, 1)
   })
 
   GltfContainer.create(rushButton, {
-    src: 'assets/scene/Models/button.glb'
+    src: 'assets/scene/Models/rushbutton.glb'
   })
 
   PointerEvents.create(rushButton, {
@@ -98,7 +98,7 @@ export function setupRushButton() {
       {
         eventType: PointerEventType.PET_DOWN,
         eventInfo: {
-          hoverText: 'ボーナスタイム！'
+          hoverText: 'Rush Sheep!'
         }
       }
     ]

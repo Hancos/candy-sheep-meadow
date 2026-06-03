@@ -1,6 +1,6 @@
 import { engine, GltfContainer, Transform } from '@dcl/sdk/ecs'
 import { Vector3 } from '@dcl/sdk/math'
-import { createZombie } from './modules/zombie'
+import { createZombie } from './modules/sheep'
 import { setupUi } from './ui'
 import { setupRushButton } from './modules/rushSheep'
 
