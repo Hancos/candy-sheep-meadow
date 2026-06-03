@@ -1,5 +1,3 @@
-assets/scene/Models/turnhead4/turnhead4.glb
-thumbnails
 package-lock.json
 node_modules
 bin
@@ -7,3 +5,9 @@ bin
 *.*~
 export
 .idea/
+
+# Third-party assets
+assets/scene/Models/turnhead4/turnhead4.glb
+
+# Generated thumbnails
+thumbnails/
