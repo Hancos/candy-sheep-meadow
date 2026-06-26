@@ -170,8 +170,8 @@ function zombieMovementSystem(deltaTime: number) {
 
       transform.position = Vector3.add(transform.position, positionDelta)
 
-      transform.position.x = Math.max(8, Math.min(22, transform.position.x))
-      transform.position.z = Math.max(8, Math.min(22, transform.position.z))
+      transform.position.x = Math.max(9, Math.min(23.8, transform.position.x))
+      transform.position.z = Math.max(7, Math.min(27, transform.position.z))
     }
   }
 }
@@ -331,6 +331,19 @@ function createFeedButton() {
 }
 
 const feedButton = createFeedButton()
+
+// uiに滞在時間の変化を教える
+export function getFeedStatus() {
+  if (isFeedingTime) {
+    return 'Active'
+  }
+
+  if (canStartFeeding) {
+    return 'Ready'
+  }
+
+  return 'Locked'
+}
 
 engine.addSystem(zombieMovementSystem)
 engine.addSystem(zombieLifeSystem)

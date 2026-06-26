@@ -114,3 +114,8 @@ export function consumeSheepMarchReward() {
 
   console.log('なでなでポイントを消費しました（リセット）')
 }
+
+// 撫でるカウントをuiに渡す
+export function getPettedSheepCount() {
+  return pettedSheepCount
+}

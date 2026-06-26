@@ -20,11 +20,17 @@ const MAX_X = 22
 const MIN_Z = 8
 const MAX_Z = 22
 
+// ===== 羊の出口 =====
+const EXIT_POSITION = Vector3.create(8, 1, 16.2)
+
+// ===== 空中散歩設定 =====
+const RUSH_SPEED_X = 3
+const RUSH_SPEED_Y = 4
+
 // ===== ボーナスタイム設定 =====
 const RUSH_DURATION = 30
 const RUSH_COOLDOWN = 40
-const RUSH_SPAWN_INTERVAL = 0.2
-const RUSH_SPEED = 5
+const RUSH_SPAWN_INTERVAL = 0.8
 
 let rushActive = false
 let rushTimer = 0
@@ -32,7 +38,22 @@ let rushCooldown = 0
 let spawnTimer = 0
 
 let rushButton: Entity | null = null
-const rushSheepEntities: Entity[] = []
+
+type RushSheepData = {
+  entity: Entity
+  speedX: number
+  speedY: number
+  speedZ: number
+  driftTime: number
+  driftSpeed: number
+  driftAmount: number
+  rotationSpeed: number
+  rotationOffsetX: number
+rotationOffsetY: number
+rotationOffsetZ: number
+}
+
+const rushSheepEntities: RushSheepData[] = []
 
 const bus = new MessageBus() //メッセージバス
 
@@ -53,12 +74,12 @@ function createRushSheep() {
   const sheep = engine.addEntity()
 
   Transform.create(sheep, {
-    position: Vector3.create(
-     MIN_X,
-     0,
-     MIN_Z + Math.random() * (MAX_Z - MIN_Z)
+   position: Vector3.create(
+    EXIT_POSITION.x,
+    EXIT_POSITION.y,
+    EXIT_POSITION.z + Math.random() * 0.8 - 0.4
     ),
-    rotation: Quaternion.fromEulerDegrees(0, 90, 0)
+   rotation: Quaternion.fromEulerDegrees(0, 90, 0)
   })
 
   GltfContainer.create(sheep, {
@@ -78,14 +99,26 @@ function createRushSheep() {
     ]
   })
 
-  rushSheepEntities.push(sheep)
+  rushSheepEntities.push({
+   entity: sheep,
+   speedX: 0.4 + Math.random() * 0.5,
+   speedY: 0.2 + Math.random() * 0.2, //上方向のスピード
+   speedZ: Math.random() * 2 - 1,
+   driftTime: Math.random() * 10,
+   driftSpeed: 1 + Math.random() * 1.5,
+   driftAmount: 0.2 + Math.random() * 0.3,
+   rotationSpeed: 1 + Math.random() * 2,
+   rotationOffsetX: Math.random() * 30 - 30,
+    rotationOffsetY: Math.random() * 0 - 30,
+    rotationOffsetZ: Math.random() * 30 - 30
+  })
 }
 
 export function setupRushButton() {
   rushButton = engine.addEntity()
 
   Transform.create(rushButton, {
-    position: Vector3.create(18, 1, 24),
+    position: Vector3.create(3.85, 7.3, 23.3),
     scale: Vector3.create(1, 1, 1)
   })
 
@@ -152,7 +185,8 @@ function rushHourSystem(dt: number) {
 
   // ラッシュ羊だけ動かす
   for (let i = rushSheepEntities.length - 1; i >= 0; i--) {
-    const entity = rushSheepEntities[i]
+    const sheepData = rushSheepEntities[i]
+    const entity = sheepData.entity
 
     if (!Transform.has(entity)) {
       rushSheepEntities.splice(i, 1)
@@ -160,11 +194,27 @@ function rushHourSystem(dt: number) {
     }
 
     const transform = Transform.getMutable(entity)
-    transform.position.x += RUSH_SPEED * dt
 
-    if (transform.position.x > MAX_X) {
-      engine.removeEntity(entity)
-      rushSheepEntities.splice(i, 1)
+     sheepData.driftTime += dt
+
+     transform.position.x += sheepData.speedX * dt
+     transform.position.y += sheepData.speedY * dt
+     transform.position.z += sheepData.speedZ * dt
+
+     transform.position.z +=
+     Math.sin(sheepData.driftTime * sheepData.driftSpeed) *
+     sheepData.driftAmount *
+     dt
+
+     transform.rotation = Quaternion.fromEulerDegrees(
+  sheepData.rotationOffsetX + Math.sin(sheepData.driftTime * 0.7) * 8,
+  90 + sheepData.rotationOffsetY + sheepData.driftTime * sheepData.rotationSpeed,
+  sheepData.rotationOffsetZ + Math.cos(sheepData.driftTime * 0.5) * 8
+)
+
+    if (transform.position.x > MAX_X || transform.position.y > 12) {
+     engine.removeEntity(entity)
+     rushSheepEntities.splice(i, 1)
     }
   }
 }
